@@ -75,7 +75,7 @@ p{margin:0}
 .menu a.active{color:var(--heading);background:var(--surface-2)}
 .nav-cta{display:flex;align-items:center;gap:10px}
 .burger{display:none;width:46px;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--heading);align-items:center;justify-content:center;cursor:pointer}
-@media (max-width:1180px){
+@media (max-width:1060px){
   .menu{position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;padding:12px 20px 20px;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow);display:none}
   .menu.open{display:flex}
   .menu a{padding:14px 12px;border-radius:10px}
@@ -203,24 +203,8 @@ p{margin:0}
 @media (max-width:860px){.steps{grid-template-columns:1fr 1fr;row-gap:36px}.steps::before{display:none}}
 @media (max-width:520px){.steps{grid-template-columns:1fr}}
 
-/* news */
+/* filter chips */
 .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
-.fchip{padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--text);font:700 .9rem/1 var(--font-head);cursor:pointer}
-.fchip[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.news{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
-.news[hidden]{display:none}
-.cover{height:170px;position:relative;display:grid;place-items:center;color:#fff}
-.cover .icon{width:56px;height:56px;stroke-width:1.6;opacity:.95}
-.cover::after{content:"";position:absolute;inset:auto 0 -1px 0;height:28px;background:var(--surface);clip-path:path("M0 28 L0 16 C60 2 130 2 200 14 L260 22 L340 6 C380 -2 430 6 520 20 L520 28Z")}
-.cv1{background:linear-gradient(135deg,#0B4D0F,#2E8B2F)}.cv2{background:linear-gradient(135deg,#F7931E,#EE5A24)}.cv3{background:linear-gradient(135deg,#6E9A07,#9BC90B);color:#062E0A}.cv4{background:linear-gradient(135deg,#07360B,#146B1A)}
-.tag{position:absolute;left:16px;top:16px;background:rgba(255,255,255,.95);color:#0B4D0F;font:700 .78rem/1 var(--font-head);padding:7px 12px;border-radius:999px;z-index:1}
-.sample{position:absolute;right:16px;top:16px;background:rgba(0,0,0,.35);color:#fff;font:600 .72rem/1 var(--font-body);padding:6px 10px;border-radius:999px;z-index:1}
-.news-body{padding:18px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
-.news-body time{font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:6px}
-.news-body h3{font-size:1.15rem}
-.news-body p{font-size:.95rem;color:var(--muted)}
-.news-note{margin-top:22px;color:var(--muted);font-size:.92rem;text-align:center}
 
 /* gallery */
 .gchip{padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--text);font:700 .9rem/1 var(--font-head);cursor:pointer;min-height:40px}
@@ -250,8 +234,6 @@ p{margin:0}
 .lb-prev{left:12px}.lb-next{right:12px}
 .lb-close:hover,.lb-nav:hover{background:rgba(255,255,255,.26)}
 @media (max-width:600px){.lb-nav{top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:none}.lightbox figure{padding:60px 12px 80px}.lightbox img{max-height:calc(100dvh - 220px)}}
-@media (max-width:980px){.cards{grid-template-columns:1fr 1fr}}
-@media (max-width:620px){.cards{grid-template-columns:1fr}}
 
 /* volunteer */
 .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,60px);align-items:start}
@@ -465,7 +447,6 @@ fieldset.field{border:0;padding:0;margin:0 0 16px;min-width:0}
       <ul class="menu" id="menu">
         <li><a href="#tentang">Tentang</a></li>
         <li><a href="#program">Program</a></li>
-        <li><a href="#kegiatan">Kegiatan</a></li>
         <li><a href="#galeri">Galeri</a></li>
         <li><a href="#relawan">Relawan</a></li>
         <li><a href="#donasi">Donasi</a></li>
@@ -680,29 +661,6 @@ fieldset.field{border:0;padding:0;margin:0 0 16px;min-width:0}
   </div>
 </section>
 
-<!-- NEWS -->
-<section class="sec" id="kegiatan">
-  <div class="container">
-    <div class="sec-head"><h2>Kegiatan dan berita</h2><p>Kabar terbaru dari program dan aksi yayasan.</p></div>
-    <div class="filters" role="group" aria-label="Filter kategori kegiatan">
-      <button class="fchip" data-f="all" aria-pressed="true">Semua</button>
-      <button class="fchip" data-f="pendidikan" aria-pressed="false">Pendidikan</button>
-      <button class="fchip" data-f="training" aria-pressed="false">Training</button>
-      <button class="fchip" data-f="tpq" aria-pressed="false">TPQ</button>
-      <button class="fchip" data-f="sosial" aria-pressed="false">Sosial</button>
-    </div>
-    <div class="cards">
-      <article class="news" data-c="training"><div class="cover cv1"><span class="tag">Training</span><span class="sample">Contoh</span><svg class="icon"><use href="#i-mic"/></svg></div><div class="news-body"><time><svg class="icon" style="width:15px;height:15px"><use href="#i-cal"/></svg>Tanggal kegiatan</time><h3>Workshop public speaking untuk pelajar</h3><p>Latihan berbicara percaya diri lewat praktik langsung dan umpan balik dari pelatih.</p></div></article>
-      <article class="news" data-c="sosial"><div class="cover cv2"><span class="tag">Sosial</span><span class="sample">Contoh</span><svg class="icon"><use href="#i-gift"/></svg></div><div class="news-body"><time><svg class="icon" style="width:15px;height:15px"><use href="#i-cal"/></svg>Tanggal kegiatan</time><h3>Pembagian buku dan alat tulis</h3><p>Relawan muda membagikan perlengkapan belajar kepada anak-anak yang membutuhkan.</p></div></article>
-      <article class="news" data-c="tpq"><div class="cover cv3"><span class="tag">TPQ</span><span class="sample">Contoh</span><svg class="icon"><use href="#i-moon"/></svg></div><div class="news-body"><time><svg class="icon" style="width:15px;height:15px"><use href="#i-cal"/></svg>Tanggal kegiatan</time><h3>Pelatihan ustaz dan ustazah berbasis digital</h3><p>Pengajar TPQ belajar memakai media digital untuk membuat kelas lebih hidup.</p></div></article>
-      <article class="news" data-c="pendidikan"><div class="cover cv4"><span class="tag">Pendidikan</span><span class="sample">Contoh</span><svg class="icon"><use href="#i-pencil"/></svg></div><div class="news-body"><time><svg class="icon" style="width:15px;height:15px"><use href="#i-cal"/></svg>Tanggal kegiatan</time><h3>Kelas soft skills akhir pekan</h3><p>Komunikasi, manajemen waktu, dan pemecahan masalah dalam format kelas yang ringan.</p></div></article>
-      <article class="news" data-c="pendidikan"><div class="cover cv1"><span class="tag">Pendidikan</span><span class="sample">Contoh</span><svg class="icon"><use href="#i-cap"/></svg></div><div class="news-body"><time><svg class="icon" style="width:15px;height:15px"><use href="#i-cal"/></svg>Tanggal kegiatan</time><h3>Mentoring persiapan kuliah dan karier</h3><p>Pendampingan memilih jurusan dan menyusun rencana studi bersama mentor.</p></div></article>
-      <article class="news" data-c="tpq"><div class="cover cv2"><span class="tag">TPQ</span><span class="sample">Contoh</span><svg class="icon"><use href="#i-book"/></svg></div><div class="news-body"><time><svg class="icon" style="width:15px;height:15px"><use href="#i-cal"/></svg>Tanggal kegiatan</time><h3>Youth Islamic camp</h3><p>Kemah pemuda yang memadukan ibadah, kebersamaan, dan penguatan akhlak.</p></div></article>
-    </div>
-    <p class="news-note">Kartu di atas adalah contoh tata letak. Judul, tanggal, dan foto diganti dengan kegiatan asli yayasan.</p>
-  </div>
-</section>
-
 <!-- GALLERY -->
 <section class="sec sec-alt" id="galeri">
   <div class="container">
@@ -912,7 +870,7 @@ fieldset.field{border:0;padding:0;margin:0 0 16px;min-width:0}
         <div class="socials"><a href="https://www.instagram.com/yayasan.phd/" target="_blank" rel="noopener" aria-label="Instagram @yayasan.phd"><svg class="icon"><use href="#i-insta"/></svg></a></div>
       </div>
       <div><h4>Tautan cepat</h4><ul>
-        <li><a href="#tentang">Tentang kami</a></li><li><a href="#misi">Visi dan misi</a></li><li><a href="#struktur">Struktur organisasi</a></li><li><a href="#kegiatan">Kegiatan dan berita</a></li>
+        <li><a href="#tentang">Tentang kami</a></li><li><a href="#misi">Visi dan misi</a></li><li><a href="#struktur">Struktur organisasi</a></li><li><a href="#galeri">Galeri kegiatan</a></li>
       </ul></div>
       <div><h4>Program</h4><ul>
         <li><a href="#program" data-tab="t1">Pendidikan formal</a></li><li><a href="#program" data-tab="t2">Pendidikan nonformal</a></li><li><a href="#program" data-tab="t3">Training dan pengembangan diri</a></li><li><a href="#program" data-tab="t4">TPQ modern</a></li><li><a href="#program" data-tab="t5">Komunitas pemuda berdaya</a></li>
@@ -994,12 +952,6 @@ fieldset.field{border:0;padding:0;margin:0 0 16px;min-width:0}
     var sel=$("#c-topik");for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===a.dataset.ask){sel.selectedIndex=i}}
   })});
 
-  // news filter
-  var chips=$$(".fchip"),items=$$(".news");
-  chips.forEach(function(c){c.addEventListener("click",function(){
-    chips.forEach(function(x){x.setAttribute("aria-pressed",x===c)});
-    items.forEach(function(n){n.hidden=!(c.dataset.f==="all"||n.dataset.c===c.dataset.f)});
-  })});
 
   // gallery filter + lightbox
   var gchips=$$(".gchip"),gitems=$$(".gallery li");
