@@ -75,7 +75,7 @@ p{margin:0}
 .menu a.active{color:var(--heading);background:var(--surface-2)}
 .nav-cta{display:flex;align-items:center;gap:10px}
 .burger{display:none;width:46px;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--heading);align-items:center;justify-content:center;cursor:pointer}
-@media (max-width:1060px){
+@media (max-width:1180px){
   .menu{position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;padding:12px 20px 20px;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow);display:none}
   .menu.open{display:flex}
   .menu a{padding:14px 12px;border-radius:10px}
@@ -221,6 +221,35 @@ p{margin:0}
 .news-body h3{font-size:1.15rem}
 .news-body p{font-size:.95rem;color:var(--muted)}
 .news-note{margin-top:22px;color:var(--muted);font-size:.92rem;text-align:center}
+
+/* gallery */
+.gchip{padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--text);font:700 .9rem/1 var(--font-head);cursor:pointer;min-height:40px}
+.gchip[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+.gallery{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.gallery li{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.gallery li[hidden]{display:none}
+.g-item{display:block;width:100%;padding:0;border:0;background:var(--surface-2);cursor:zoom-in;aspect-ratio:4/3;overflow:hidden}
+.g-item img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .4s ease}
+.g-item:hover img{transform:scale(1.04)}
+.g-cap{padding:16px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.g-tag{align-self:flex-start;background:var(--surface-2);color:var(--heading);font:700 .78rem/1 var(--font-head);padding:6px 11px;border-radius:999px}
+.g-cap h3{font-size:1.08rem;margin-top:4px}
+.g-cap p{font-size:.93rem;color:var(--muted);line-height:1.5}
+@media (max-width:980px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.gallery{grid-template-columns:1fr;gap:18px}}
+.lightbox{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh;width:100vw;height:100vh;margin:0;color:#fff}
+.lightbox[open]{display:flex;align-items:center;justify-content:center}
+.lightbox::backdrop{background:rgba(4,20,8,.92)}
+.lightbox figure{margin:0;padding:56px 16px 20px;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:min(1100px,100%)}
+.lightbox img{max-width:100%;max-height:calc(100vh - 160px);max-height:calc(100dvh - 160px);object-fit:contain;border-radius:12px}
+.lightbox figcaption{text-align:center;font-size:.98rem;color:#DDEBD6;max-width:46em}
+.lightbox figcaption b{display:block;color:#fff;font:700 1.1rem/1.3 var(--font-head)}
+.lb-close,.lb-nav{position:fixed;border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:999px;width:48px;height:48px;font-size:2rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.lb-close{top:calc(12px + env(safe-area-inset-top,0px));right:12px}
+.lb-nav{top:50%;transform:translateY(-50%)}
+.lb-prev{left:12px}.lb-next{right:12px}
+.lb-close:hover,.lb-nav:hover{background:rgba(255,255,255,.26)}
+@media (max-width:600px){.lb-nav{top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:none}.lightbox figure{padding:60px 12px 80px}.lightbox img{max-height:calc(100dvh - 220px)}}
 @media (max-width:980px){.cards{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.cards{grid-template-columns:1fr}}
 
@@ -437,6 +466,7 @@ fieldset.field{border:0;padding:0;margin:0 0 16px;min-width:0}
         <li><a href="#tentang">Tentang</a></li>
         <li><a href="#program">Program</a></li>
         <li><a href="#kegiatan">Kegiatan</a></li>
+        <li><a href="#galeri">Galeri</a></li>
         <li><a href="#relawan">Relawan</a></li>
         <li><a href="#donasi">Donasi</a></li>
         <li><a href="#struktur">Struktur</a></li>
@@ -672,6 +702,37 @@ fieldset.field{border:0;padding:0;margin:0 0 16px;min-width:0}
     <p class="news-note">Kartu di atas adalah contoh tata letak. Judul, tanggal, dan foto diganti dengan kegiatan asli yayasan.</p>
   </div>
 </section>
+
+<!-- GALLERY -->
+<section class="sec sec-alt" id="galeri">
+  <div class="container">
+    <div class="sec-head"><h2>Galeri kegiatan</h2><p>Potret kegiatan yayasan dari kelas Al-Qur’an, kajian, sampai pelatihan pemuda.</p></div>
+    <div class="filters" role="group" aria-label="Filter kategori galeri">
+      <button class="gchip" data-g="all" aria-pressed="true">Semua</button>
+      <button class="gchip" data-g="tpq" aria-pressed="false">TPQ modern</button>
+      <button class="gchip" data-g="daring" aria-pressed="false">Kelas daring</button>
+      <button class="gchip" data-g="training" aria-pressed="false">Training</button>
+    </div>
+    <ul class="gallery">
+      <li data-g="tpq"><button class="g-item" type="button"><img src="galeri/tahsin-tatap-muka-1.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Peserta ikhwan dan akhwat duduk di depan meja kecil menyimak ustaz dalam kelas tahsin Al-Qur’an"></button><div class="g-cap"><span class="g-tag">TPQ modern</span><h3>Kelas tahsin Al-Qur’an dewasa</h3><p>Belajar memperbaiki bacaan Al-Qur’an secara tatap muka bersama ustaz.</p></div></li>
+      <li data-g="tpq"><button class="g-item" type="button"><img src="galeri/kajian-talim-mutaallim.webp" width="960" height="1280" loading="lazy" decoding="async" alt="Ustaz menyampaikan kajian kitab Ta’lim Muta’allim di depan peserta yang mencatat"></button><div class="g-cap"><span class="g-tag">TPQ modern</span><h3>Kajian kitab Ta’lim Muta’allim</h3><p>Kajian adab penuntut ilmu bersama Ummi Bandar Lampung, rutin Sabtu pekan terakhir setiap bulan.</p></div></li>
+      <li data-g="tpq"><button class="g-item" type="button"><img src="galeri/tahsin-akhwat.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Peserta akhwat menyimak dan mencatat materi kelas tahsin"></button><div class="g-cap"><span class="g-tag">TPQ modern</span><h3>Kelas tahsin akhwat</h3><p>Peserta putri menyimak materi dan mencatat kaidah bacaan Al-Qur’an.</p></div></li>
+      <li data-g="training"><button class="g-item" type="button"><img src="galeri/seminar-motivasi-pelajar.webp" width="1280" height="854" loading="lazy" decoding="async" alt="Pemateri berbicara di depan ratusan pelajar yang mengangkat jari telunjuk"></button><div class="g-cap"><span class="g-tag">Training</span><h3>Seminar motivasi pelajar</h3><p>Training motivasi dan public speaking yang membangun semangat ratusan pelajar.</p></div></li>
+      <li data-g="tpq"><button class="g-item" type="button"><img src="galeri/tahsin-tatap-muka-2.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Ustaz mengajar kelas tahsin di ruangan berdinding kuning dengan peserta duduk lesehan"></button><div class="g-cap"><span class="g-tag">TPQ modern</span><h3>Halaqah tahsin bersama</h3><p>Ikhwan dan akhwat belajar Al-Qur’an dalam satu majelis yang tertib.</p></div></li>
+      <li data-g="training"><button class="g-item" type="button"><img src="galeri/workshop-kewirausahaan.webp" width="1280" height="960" loading="lazy" decoding="async" alt="Workshop kewirausahaan di aula dengan banyak mahasiswa menghadap pemateri"></button><div class="g-cap"><span class="g-tag">Training</span><h3>Workshop kewirausahaan mahasiswa</h3><p>Menumbuhkan jiwa wirausaha bersama mahasiswa Bidikmisi FKIP Unila.</p></div></li>
+      <li data-g="daring"><button class="g-item" type="button"><img src="galeri/tahsin-daring-1.webp" width="1280" height="712" loading="lazy" decoding="async" alt="Kelas tahsin lewat Google Meet, pengajar menampilkan halaman bacaan Al-Qur’an"></button><div class="g-cap"><span class="g-tag">Kelas daring</span><h3>Tahsin daring via Google Meet</h3><p>Belajar Al-Qur’an dari rumah dengan materi yang ditampilkan langsung di layar.</p></div></li>
+      <li data-g="daring"><button class="g-item" type="button"><img src="galeri/tahsin-daring-2.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Pengajar ikhwan memandu latihan huruf hijaiyah lewat Google Meet"></button><div class="g-cap"><span class="g-tag">Kelas daring</span><h3>Latihan huruf hijaiyah daring</h3><p>Pengajar memandu latihan bacaan huruf demi huruf secara online.</p></div></li>
+      <li data-g="daring"><button class="g-item" type="button"><img src="galeri/tahsin-daring-3.webp" width="1280" height="698" loading="lazy" decoding="async" alt="Empat peserta akhwat mengikuti kelas tahsin daring"></button><div class="g-cap"><span class="g-tag">Kelas daring</span><h3>Kelas tahsin daring akhwat</h3><p>Peserta bergiliran membaca dan langsung dikoreksi oleh pengajar.</p></div></li>
+      <li data-g="daring"><button class="g-item" type="button"><img src="galeri/tahsin-daring-gharaib.webp" width="1064" height="1038" loading="lazy" decoding="async" alt="Materi bacaan ayat-ayat gharib ditampilkan dalam kelas daring"></button><div class="g-cap"><span class="g-tag">Kelas daring</span><h3>Kelas bacaan gharib</h3><p>Mempelajari ayat-ayat dengan cara baca khusus (gharaibul Qur’an).</p></div></li>
+    </ul>
+  </div>
+</section>
+<dialog class="lightbox" id="lightbox" aria-label="Foto galeri">
+  <button class="lb-close" type="button" aria-label="Tutup foto">&times;</button>
+  <button class="lb-nav lb-prev" type="button" aria-label="Foto sebelumnya">&#8249;</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-nav lb-next" type="button" aria-label="Foto berikutnya">&#8250;</button>
+</dialog>
 
 <!-- VOLUNTEER -->
 <section class="sec" id="relawan">
@@ -939,6 +1000,31 @@ fieldset.field{border:0;padding:0;margin:0 0 16px;min-width:0}
     chips.forEach(function(x){x.setAttribute("aria-pressed",x===c)});
     items.forEach(function(n){n.hidden=!(c.dataset.f==="all"||n.dataset.c===c.dataset.f)});
   })});
+
+  // gallery filter + lightbox
+  var gchips=$$(".gchip"),gitems=$$(".gallery li");
+  gchips.forEach(function(c){c.addEventListener("click",function(){
+    gchips.forEach(function(x){x.setAttribute("aria-pressed",x===c)});
+    gitems.forEach(function(n){n.hidden=!(c.dataset.g==="all"||n.dataset.g===c.dataset.g)});
+  })});
+  var lb=$("#lightbox"),lbImg=$("#lbImg"),lbCap=$("#lbCap"),gi=0;
+  function visibleG(){return gitems.filter(function(n){return !n.hidden})}
+  function showG(li){
+    var img=$("img",li);lbImg.src=img.src;lbImg.alt=img.alt;
+    lbCap.textContent="";var b=document.createElement("b");b.textContent=$("h3",li).textContent;lbCap.appendChild(b);lbCap.appendChild(document.createTextNode($("p",li).textContent));
+    gi=visibleG().indexOf(li);
+  }
+  function stepG(d){var v=visibleG();if(v.length){showG(v[(gi+d+v.length)%v.length])}}
+  if(lb&&lb.showModal){
+    gitems.forEach(function(li){$(".g-item",li).addEventListener("click",function(){showG(li);lb.showModal()})});
+    $(".lb-close",lb).addEventListener("click",function(){lb.close()});
+    $(".lb-prev",lb).addEventListener("click",function(){stepG(-1)});
+    $(".lb-next",lb).addEventListener("click",function(){stepG(1)});
+    lb.addEventListener("click",function(e){if(e.target===lb||e.target.tagName==="FIGURE"){lb.close()}});
+    lb.addEventListener("keydown",function(e){if(e.key==="ArrowLeft"){stepG(-1)}else if(e.key==="ArrowRight"){stepG(1)}});
+    var tx=null;lb.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+    lb.addEventListener("touchend",function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50){stepG(dx<0?1:-1)}tx=null});
+  }
 
   // validation helper
   function check(form,ids){
